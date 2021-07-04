@@ -7,14 +7,16 @@ import { Ingredents } from '../shared/ingredient.model';
   styleUrls: ['./shoping-list.component.css']
 })
 export class ShopingListComponent implements OnInit {
-ingredients:Ingredents[]=[
-new Ingredents("Apple",5),
-new Ingredents("Tomatto",10)
+  ingredients: Ingredents[] = [
+    new Ingredents("Apple", 5),
+    new Ingredents("Tomatto", 10)
 
-];
+  ];
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  getGeneratedIng(event: Ingredents) {
+    this.ingredients.push(event);
+  }
 }

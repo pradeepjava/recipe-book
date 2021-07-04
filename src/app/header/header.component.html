@@ -7,8 +7,8 @@
 
 <div class="navbar-collapse" (window:resize)="collapsed=true" [class.collapse]="collapsed">
     <ul class="nav navbar-nav">
-        <li><a href="#">Recipies</a></li>
-        <li><a href="#">Shoping List</a></li>
+        <li><a href="#" role="button" (click)="decideMenu('recipe')">Recipies</a></li>
+        <li><a href="#" role="button" (click)="decideMenu('shoping')">Shoping List</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">

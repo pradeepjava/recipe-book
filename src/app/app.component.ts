@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  menuDecider = "recipe";
   title = 'recipe-book';
+  selectMenu(event: string) {
+    this.menuDecider = event;
+  }
 }
