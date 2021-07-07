@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Ingredents } from "../shared/ingredient.model";
 import { ShopingListService } from "../shoping-list/shoping-list.service";
 import { Recipe } from "./recipe.model";
@@ -6,7 +6,7 @@ import { Recipe } from "./recipe.model";
 @Injectable()
 export class RecipeService {
     constructor(private shopinglistService: ShopingListService) { }
-    selectedRecepie = new EventEmitter<Recipe>();
+   
     recipies: Recipe[] = [
         new Recipe("Super Meat", "test how it is?",
             "https://us.123rf.com/450wm/lsantilli/lsantilli1604/lsantilli160400046/56837587-raw-meat-mix-isolated-on-white.jpg?ver=6",
