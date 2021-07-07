@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core'
+import { Component} from '@angular/core'
 
 @Component({
 
@@ -7,8 +7,5 @@ import { Component, EventEmitter, Output } from '@angular/core'
 })
 export class HeaderComponent {
     collapsed = true;
-    @Output() eventGenerator = new EventEmitter<string>();
-    decideMenu(feature: string) {
-        this.eventGenerator.emit(feature);
-    }
+   
 }

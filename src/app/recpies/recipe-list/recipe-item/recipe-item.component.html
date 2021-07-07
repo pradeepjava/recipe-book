@@ -1,4 +1,7 @@
-<a href="#" class="list-group-item clearfix" role="button" (click)="onSelected()">
+<a 
+[routerLink]="[index]"
+routerLinkActive="active"
+style="cursor: pointer; color:red" class="list-group-item clearfix" role="button" >
     <div class="pull-left">
         <h4 class="list-group-item">{{recipe.name}}</h4>
         <p class="list-group-item">{{recipe.description}}</p>

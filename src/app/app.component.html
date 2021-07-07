@@ -1,10 +1,9 @@
-<app-header (eventGenerator)="selectMenu($event)"></app-header>
+<app-header></app-header>
 
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <app-recpies *ngIf="menuDecider==='recipe'"></app-recpies>
-      <app-shoping-list *ngIf="menuDecider!='recipe'"></app-shoping-list>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

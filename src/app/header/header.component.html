@@ -7,15 +7,15 @@
 
 <div class="navbar-collapse" (window:resize)="collapsed=true" [class.collapse]="collapsed">
     <ul class="nav navbar-nav">
-        <li><a href="#" role="button" (click)="decideMenu('recipe')">Recipies</a></li>
-        <li><a href="#" role="button" (click)="decideMenu('shoping')">Shoping List</a></li>
+        <li><a routerLink="/recipes" routerLinkActive="active" role="button">Recipies</a></li>
+        <li><a routerLink="/shoping-list" routerLinkActive="active" role="button">Shoping List</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" appDropdown>
-            <a href="#" class="dropdown-toggle" type="button">Manage<span class="caret"></span></a>
+            <a style="cursor: pointer;" class="dropdown-toggle" type="button">Manage<span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li><a href="#">Save Data</a></li>
-                <li><a href="#">Fetch Data</a></li>
+                <li><a style="cursor: pointer;">Save Data</a></li>
+                <li><a style="cursor: pointer;">Fetch Data</a></li>
             </ul>
         </li>
     </ul>
