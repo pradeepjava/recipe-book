@@ -18,5 +18,8 @@ export class ShopingListComponent implements OnInit {
       this.ingredients = ing;
     })
   }
+  getIndexOfItem(index: number) {
+    this.shopinglistService.itemIndexToBeEdited.next(index);
+  }
 
 }

@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 import { Ingredents } from "../shared/ingredient.model";
 import { ShopingListService } from "../shoping-list/shoping-list.service";
 import { Recipe } from "./recipe.model";
@@ -6,7 +7,7 @@ import { Recipe } from "./recipe.model";
 @Injectable()
 export class RecipeService {
     constructor(private shopinglistService: ShopingListService) { }
-   
+    subjectRecipe = new Subject<Recipe[]>();
     recipies: Recipe[] = [
         new Recipe("Super Meat", "test how it is?",
             "https://us.123rf.com/450wm/lsantilli/lsantilli1604/lsantilli160400046/56837587-raw-meat-mix-isolated-on-white.jpg?ver=6",
@@ -24,13 +25,26 @@ export class RecipeService {
         )
     ];
 
+    saveRecipe(recipe: Recipe) {
+        this.recipies.push(recipe);
+        this.subjectRecipe.next(this.recipies.slice());
+    }
+    updateRecipe(index: number, recipe: Recipe) {
+        this.recipies[index] = recipe;
+        this.subjectRecipe.next(this.recipies.slice());
+    }
     getRecipes() {
         return this.recipies.slice();
     }
     getRecipeById(id: number) {
         return this.recipies[id];
     }
+
     addIngredents(ing: Ingredents[]) {
         this.shopinglistService.addIngredentsToShopingList(ing);
+    }
+    deleteRecipe(index: number) {
+        this.recipies.splice(index, 1);
+        this.subjectRecipe.next(this.recipies.slice());
     }
 }
