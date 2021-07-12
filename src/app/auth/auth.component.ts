@@ -1,23 +1,37 @@
-import { Component } from "@angular/core";
+import { Component, ComponentFactoryResolver, OnDestroy, ViewChild, ViewContainerRef } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
+import { AlertComponent } from "../shared/alert/alert.component";
 import { AuthResponseData, AuthService } from "./auth.service";
-import { User } from "./user.model";
 
 @Component({
     selector: 'app-auth',
     templateUrl: './auth.component.html'
 })
-export class AuthComponent {
+export class AuthComponent implements OnDestroy {
     isLogginMode = true;
     isLoading = false;
     error = ''
-    constructor(private authService: AuthService, private route: Router) { }
+    eventSubscription: Subscription;
+    constructor(private authService: AuthService, private route: Router,
+        private componentFactoryResolver: ComponentFactoryResolver
+    ) { }
+    
+    ngOnDestroy(): void {
+        if (this.eventSubscription) {
+            this.eventSubscription.unsubscribe();
+        }
+    }
+
+    @ViewChild('alertToDisplay', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
+
     switchMode() {
         this.isLogginMode = !this.isLogginMode;
     }
-
+    closePopup() {
+        this.error = '';
+    }
     onSubmit(authForm: NgForm) {
         const email = authForm.value.email;
         const password = authForm.value.password;
@@ -39,11 +53,23 @@ export class AuthComponent {
             this.route.navigate(['/recipes']);
         }, errorMsg => {
             this.error = errorMsg;
+            this.showAlertProgrammatically(errorMsg);
             console.log(errorMsg)
             this.isLoading = false;
         }
         )
         authForm.reset();
     }
-  
+
+    showAlertProgrammatically(errorMsg: string) {
+        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(AlertComponent)
+        this.viewContainerRef.clear();
+        let componentRef = this.viewContainerRef.createComponent(componentFactory);
+        componentRef.instance.message = errorMsg;
+        this.eventSubscription = componentRef.instance.closeEvent.subscribe(() => {
+            this.eventSubscription.unsubscribe();
+            this.viewContainerRef.clear();
+        });
+
+    }
 }

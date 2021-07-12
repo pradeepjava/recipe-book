@@ -21,6 +21,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AuthComponent } from './auth/auth.component';
 import { SpinnerComponent } from './shared/spinner.component';
 import { AuthInterceptor } from './auth/auth.interceptor.service';
+import { AlertComponent } from './shared/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AuthInterceptor } from './auth/auth.interceptor.service';
     RecipeStartComponent,
     RecpieEditComponent,
     AuthComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +50,7 @@ import { AuthInterceptor } from './auth/auth.interceptor.service';
   ],
   providers: [ShopingListService, RecipeService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[AlertComponent]
 })
 export class AppModule { }
