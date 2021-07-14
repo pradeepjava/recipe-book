@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { DataStorageService } from '../shared/data.storage.service';
 import { User } from './user.model';
+import {environment} from '../../environments/environment';
 
 export interface AuthResponseData {
   idToken: string,
@@ -15,9 +15,8 @@ export interface AuthResponseData {
   registered?: boolean
 }
 
-const SIGNUP_URL = '';
-const API_KEY = ''
-const SIGNIN_URL = ''
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -99,8 +98,8 @@ function getConvertedError(error: any) {
 
 function getFinalUrl(signType: string) {
   if (signType === 'signup') {
-    return `${SIGNUP_URL}` + API_KEY;
+    return `${environment.SIGNUP_URL}` + environment.API_KEY;
   }
-  return `${SIGNIN_URL}` + API_KEY
+  return `${environment.SIGNIN_URL}` + environment.API_KEY
 }
 
